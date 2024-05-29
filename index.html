@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
+    <title>Sorteio de Números</title>
+</head>
+<body>
+    <h2>Sorteio de EXP</h2>
+
+    <h3>
+        Escolha primeiro o intervalo de uma escala, depois o intervalo de números
+        que serão os vencedores dentro dessa escala
+    </h3>
+
+    <div>
+        <label for="intervaloMaiorMin">Limite inferior do intervalo maior:</label>
+        <input type="number" id="intervaloMaiorMin" />
+        <label for="intervaloMaiorMax">Limite superior do intervalo maior:</label>
+        <input type="number" id="intervaloMaiorMax" />
+    </div>
+    <br />
+    <div>
+        <label for="intervaloMenorMin">Limite inferior do intervalo menor:</label>
+        <input type="number" id="intervaloMenorMin" />
+        <label for="intervaloMenorMax">Limite superior do intervalo menor:</label>
+        <input type="number" id="intervaloMenorMax" />
+    </div>
+    <br />
+    <div>
+        <label for="quantidadeNumeros">Quantidade de números a serem sorteados:</label>
+        <input type="number" id="quantidadeNumeros" />
+    </div>
+
+    <button onclick="sortear()">Sortear</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function sortear() {
+            var intervaloMaiorMin = parseInt(document.getElementById("intervaloMaiorMin").value);
+            var intervaloMaiorMax = parseInt(document.getElementById("intervaloMaiorMax").value);
+            var intervaloMenorMin = parseInt(document.getElementById("intervaloMenorMin").value);
+            var intervaloMenorMax = parseInt(document.getElementById("intervaloMenorMax").value);
+            var quantidadeNumeros = parseInt(document.getElementById("quantidadeNumeros").value);
+
+            var numerosSorteados = [];
+            var numerosGanhadores = [];
+
+            for (var i = 0; i < quantidadeNumeros; i++) {
+                var numeroAleatorio = Math.floor(Math.random() * (intervaloMaiorMax - intervaloMaiorMin + 1)) + intervaloMaiorMin;
+                numerosSorteados.push(numeroAleatorio);
+                if (numeroAleatorio >= intervaloMenorMin && numeroAleatorio <= intervaloMenorMax) {
+                    numerosGanhadores.push(numeroAleatorio);
+                }
+            }
+
+            var resultadoHTML = "Quantidade de packs de EXP que tem direito: " + numerosGanhadores.length + "<br>";
+            resultadoHTML += "Números sorteados: " + numerosSorteados.join(", ");
+            resultadoHTML += "<br>Números ganhadores: " + numerosGanhadores.join(", ");  // Linha adicionada
+
+            document.getElementById("resultado").innerHTML = resultadoHTML;
+        }
+    </script>
+</body>
+</html>
